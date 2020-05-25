@@ -10,20 +10,22 @@ module.exports = StyleSheet.create({
     justifyContent: 'space-around',
   },
   box: {
-    padding: 20,
-    marginTop: 50,
+    flex: 1,
+    marginTop: 25,
+    marginBottom: 25,
     alignSelf: 'stretch',
     backgroundColor: '#d6eae6',
+    justifyContent: 'center',
   },
   deckName: {
     textAlign: 'center',
+    marginBottom: 20,
     fontSize: 35,
   },
   numCards: {
     textAlign: 'center',
     fontSize: 25,
     color: '#417070',
-    marginBottom: 100,
   },
   headerText: {
     marginTop: 50,
@@ -69,5 +71,5 @@ module.exports = StyleSheet.create({
   },
   textBox: {
     marginTop: 35,
-  }
+  },
 })
