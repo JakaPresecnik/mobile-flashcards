@@ -28,8 +28,6 @@ module.exports = StyleSheet.create({
     color: '#417070',
   },
   headerText: {
-    marginTop: 50,
-    marginBottom: 25,
     padding: 5,
     fontSize: 35,
     textAlign: 'center',

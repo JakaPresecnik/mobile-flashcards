@@ -12,9 +12,9 @@ class Quiz extends Component {
     return(
       <View style={[styles.container, {marginTop: 50}]}>
 
-      <QuizResults />
+      {/*<QuizResults />*/}
 
-        {/*<FlipCard flipHorizontal={true} flipVertical={false}>
+        <FlipCard flipHorizontal={true} flipVertical={false}>
           <View style={styles.face}>
             <Text style={styles.headerText}>Does React Native work with Android?</Text>
             <Text style={styles.cardText}>Show answer</Text>
@@ -30,7 +30,7 @@ class Quiz extends Component {
         </TouchableOpacity>
         <TouchableOpacity style={[styles.btn, {backgroundColor: 'red'}]}>
           <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
-        </TouchableOpacity>*/}
+        </TouchableOpacity>
 
       </View>
     )
