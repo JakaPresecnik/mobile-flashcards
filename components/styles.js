@@ -11,6 +11,7 @@ module.exports = StyleSheet.create({
   },
   box: {
     flex: 1,
+    minHeight: 150,
     marginTop: 25,
     marginBottom: 25,
     alignSelf: 'stretch',

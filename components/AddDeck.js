@@ -11,9 +11,9 @@ class AddDeck extends Component {
   }
 
   onSubmit(inputText) {
-    const { navigation } = this.props
+    const { navigation, dispatch } = this.props
 
-    this.props.dispatch(addDeck(inputText))
+    dispatch(addDeck(inputText))
     this.setState({inputText: ''})
     navigation.navigate('Home')
   }

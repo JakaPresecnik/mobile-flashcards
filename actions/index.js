@@ -11,11 +11,12 @@ export function addDeck (deckName) {
   }
 }
 
-const addCard = (question, answer) => {
+export const addCard = (question, answer, id) => {
   return {
     type: ADD_CARD,
     key: generateID(),
     question,
     answer,
+    id,
   }
 }

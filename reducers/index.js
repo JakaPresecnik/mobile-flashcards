@@ -14,14 +14,16 @@ export default function reducer (state = {}, action) {
     case ADD_CARD:
       return {
         ...state,
-          collection: state.collection.concat({
-            key,
-            question,
-            answer,
-            answeredCorrectNum: 0,
-            answeredIncorrectNum: 0,
-          })
-
+        [action.id]: {
+          ...state[action.id],
+            collection: state[action.id].collection.concat({
+              question: action.question,
+              answer: action.answer,
+              key: action.key,
+              answeredCorrectNum: 0,
+              answeredIncorrectNum: 0,
+            })
+        },
       }
   }
 }
