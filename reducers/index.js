@@ -1,15 +1,15 @@
 import { ADD_DECK, ADD_CARD } from '../actions'
 
-export default function reducer (state = [], action) {
+export default function reducer (state = {}, action) {
   switch(action.type) {
     case ADD_DECK:
       return {
         ...state,
-        state: state.concat({
-          key: action.key,
-          name: action.deckName,
-          collection: [],
-        })
+          [action.key]: {
+            key: action.key,
+            name: action.deckName,
+            collection: [],
+          }
       }
     case ADD_CARD:
       return {
