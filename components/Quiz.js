@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import FlipCard from 'react-native-flip-card'
 import ProgressCircle from 'react-native-progress-circle'
 import styles from './styles'
+import { connect } from 'react-redux'
+import { saveStats } from '../actions'
 
 // FlipCard added instructions: https://openbase.io/js/react-native-flip-card
 // installed react-native-progress-circle site: https://www.npmjs.com/package/react-native-progress-circle
@@ -28,7 +30,10 @@ class Quiz extends Component {
     }))
   }
 
-  restart () {
+  restart (correct, incorrect, id) {
+    const { dispatch } = this.props
+    dispatch(saveStats(correct, incorrect, id))
+
     this.setState({
       card: 0,
       correct: 0,
@@ -37,16 +42,20 @@ class Quiz extends Component {
   }
 
   render() {
-    const { collection } = this.props.route.params
+    const { collection, id } = this.props.route.params
     const { card, correct, incorrect } = this.state
     const totalAnswers = correct + incorrect
     const percentage = correct / totalAnswers * 100
 
-    return(
-      <View style={[styles.container, {marginTop: 50}]}>
-      {
-        collection.length === card
-        ? (
+    if (collection.length === 0) {
+      return (
+        <View style={[styles.container, {marginTop: 50}]}>
+          <Text style={styles.headerText}>You have no cards.</Text>
+        </View>
+      )
+    }else if (collection.length === card) {
+      return (
+        <View style={[styles.container, {marginTop: 50}]}>
           <View style={styles.container}>
             <ProgressCircle
                 percent={percentage}
@@ -63,11 +72,15 @@ class Quiz extends Component {
               <Text style={[styles.regularText, {color: 'green'}]}>Correct answers: {correct}</Text>
               <Text style={[styles.regularText, {color: 'red'}]}>Incorrect answers: {incorrect}</Text>
             </View>
-            <TouchableOpacity onPress={e => this.restart()} style={[styles.btn, {backgroundColor: '#c2f2e1'}]}>
-              <Text style={styles.btnText}>RESTART</Text>
+            <TouchableOpacity onPress={e => this.restart(correct, incorrect, id)} style={[styles.btn, {backgroundColor: '#c2f2e1'}]}>
+              <Text style={styles.btnText}>RESTART & SAVE</Text>
             </TouchableOpacity>
           </View>
-        ) : (
+        </View>
+      )
+    } else {
+      return (
+        <View style={[styles.container, {marginTop: 50}]}>
           <View>
             <FlipCard flipHorizontal={true} flipVertical={false}>
               <View style={styles.face}>
@@ -87,11 +100,9 @@ class Quiz extends Component {
               <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
             </TouchableOpacity>
           </View>
-        )
-      }
-
-      </View>
-    )
+          </View>
+      )
+    }
   }
 }
-export default Quiz
+export default connect()(Quiz)

@@ -15,6 +15,7 @@ import reducer from './reducers'
 import Deck from './components/Deck' //added
 import Quiz from './components/Quiz'
 import AddCard from './components/AddCard'
+import Stats from './components/Stats'
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -56,6 +57,7 @@ export default function App() {
            <HomeStack.Screen name="Deck" component={Deck} />
            <HomeStack.Screen name="Quiz" component={Quiz} />
            <HomeStack.Screen name="AddCard" component={AddCard} />
+           <HomeStack.Screen name="Stats" component={Stats} />
           </HomeStack.Navigator>
 
 
