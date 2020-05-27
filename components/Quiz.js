@@ -92,13 +92,14 @@ class Quiz extends Component {
                 <Text style={styles.cardText}>Show question</Text>
               </View>
             </FlipCard>
-
-            <TouchableOpacity onPress={e => this.answerCorr()} style={[styles.btn, {backgroundColor: 'green'}]}>
-              <Text style={[styles.btnText, {color: '#003f00'}]}>CORRECT</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={e => this.answerIncorr()} style={[styles.btn, {backgroundColor: 'red'}]}>
-              <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
-            </TouchableOpacity>
+            <View style={{alignSelf: 'center'}}>
+              <TouchableOpacity onPress={e => this.answerCorr()} style={[styles.btn, {backgroundColor: 'green'}]}>
+                <Text style={[styles.btnText, {color: '#003f00'}]}>CORRECT</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={e => this.answerIncorr()} style={[styles.btn, {backgroundColor: 'red'}]}>
+                <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           </View>
       )

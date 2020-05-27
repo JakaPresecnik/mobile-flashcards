@@ -27,6 +27,7 @@ class AddCard extends Component {
       question: '',
       answer: ''
     })
+     navigation.navigate('Deck')
   }
 
   render() {

@@ -54,7 +54,8 @@ export default function App() {
             headerTintColor: '#c2f2e1',
           }}>
            <HomeStack.Screen name="Home" component={HomeTabScreen} options={{headerShown: false}}  />
-           <HomeStack.Screen name="Deck" component={Deck} />
+           <HomeStack.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.name })}
+/>
            <HomeStack.Screen name="Quiz" component={Quiz} />
            <HomeStack.Screen name="AddCard" component={AddCard} />
            <HomeStack.Screen name="Stats" component={Stats} />
