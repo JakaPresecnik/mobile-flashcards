@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native'
 import styles from './styles'
+import generateID from '../actions/util.js'
 
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
@@ -15,7 +16,7 @@ class AddDeck extends Component {
 
     dispatch(addDeck(inputText))
     this.setState({inputText: ''})
-    navigation.navigate('Home')
+    navigation.navigate('Deck')
   }
 
   render() {

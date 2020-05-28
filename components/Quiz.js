@@ -41,6 +41,13 @@ class Quiz extends Component {
     })
   }
 
+  goBack (correct, incorrect, id) {
+    const { navigation, dispatch } = this.props
+    dispatch(saveStats(correct, incorrect, id))
+
+    navigation.navigate('Deck')
+  }
+
   render() {
     const { collection, id } = this.props.route.params
     const { card, correct, incorrect } = this.state
@@ -73,14 +80,18 @@ class Quiz extends Component {
               <Text style={[styles.regularText, {color: 'red'}]}>Incorrect answers: {incorrect}</Text>
             </View>
             <TouchableOpacity onPress={e => this.restart(correct, incorrect, id)} style={[styles.btn, {backgroundColor: '#c2f2e1'}]}>
-              <Text style={styles.btnText}>RESTART & SAVE</Text>
+              <Text style={styles.btnText}>RESTART</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={e => this.goBack(correct, incorrect, id)} style={[styles.btn, {backgroundColor: '#c2f2e1'}]}>
+              <Text style={styles.btnText}>BACK</Text>
             </TouchableOpacity>
           </View>
         </View>
       )
     } else {
       return (
-        <View style={[styles.container, {marginTop: 50}]}>
+        <View style={[styles.container, {marginTop: 10}]}>
+        <Text style={[styles.cardText, styles.cardCount]}>{card + 1}/{collection.length}</Text>
           <View>
             <FlipCard flipHorizontal={true} flipVertical={false}>
               <View style={styles.face}>
@@ -92,7 +103,9 @@ class Quiz extends Component {
                 <Text style={styles.cardText}>Show question</Text>
               </View>
             </FlipCard>
+
             <View style={{alignSelf: 'center'}}>
+
               <TouchableOpacity onPress={e => this.answerCorr()} style={[styles.btn, {backgroundColor: 'green'}]}>
                 <Text style={[styles.btnText, {color: '#003f00'}]}>CORRECT</Text>
               </TouchableOpacity>

@@ -72,4 +72,9 @@ module.exports = StyleSheet.create({
   textBox: {
     marginTop: 35,
   },
+  cardCount: {
+    alignSelf: 'flex-end',
+    marginBottom: 40,
+    marginRight: 20,
+  }
 })

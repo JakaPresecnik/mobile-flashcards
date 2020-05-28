@@ -6,6 +6,8 @@ import styles from './components/styles'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import AsyncStorage from '@react-native-community/async-storage';
+import { persistStore, persistReducer } from 'redux-persist'
 
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -17,9 +19,16 @@ import Quiz from './components/Quiz'
 import AddCard from './components/AddCard'
 import Stats from './components/Stats'
 
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+}
+
 const Tab = createMaterialTopTabNavigator()
 
-let store = createStore(reducer, middleware)
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+let store = createStore(persistedReducer, middleware)
 
 function HomeTabScreen() {
  return (
