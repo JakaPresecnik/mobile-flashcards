@@ -1,8 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Home from './components/Home'
-import AddDeck from './components/AddDeck'
-import styles from './components/styles'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -14,10 +11,14 @@ import { Provider } from 'react-redux'
 import middleware from './middleware'
 import reducer from './reducers'
 
-import Deck from './components/Deck' //added
+import Home from './components/Home'
+import AddDeck from './components/AddDeck'
+import styles from './components/styles'
+import Deck from './components/Deck'
 import Quiz from './components/Quiz'
 import AddCard from './components/AddCard'
 import Stats from './components/Stats'
+import {setLocalNotification} from './util'
 
 const persistConfig = {
   key: 'root',
@@ -49,32 +50,37 @@ function HomeTabScreen() {
 
 const HomeStack = createStackNavigator()
 
-export default function App() {
-  return (
-    <Provider store={store}>
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+  render() {
+    return (
+      <Provider store={store}>
 
-      <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
 
-        <NavigationContainer>
-          <HomeStack.Navigator screenOptions={{
-              headerStyle: {
-              backgroundColor: '#417070',
-            },
-            headerTintColor: '#c2f2e1',
-          }}>
-           <HomeStack.Screen name="Home" component={HomeTabScreen} options={{headerShown: false}}  />
-           <HomeStack.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.name })}
-/>
-           <HomeStack.Screen name="Quiz" component={Quiz} />
-           <HomeStack.Screen name="AddCard" component={AddCard} />
-           <HomeStack.Screen name="Stats" component={Stats} />
-          </HomeStack.Navigator>
+          <NavigationContainer>
+            <HomeStack.Navigator screenOptions={{
+                headerStyle: {
+                backgroundColor: '#417070',
+              },
+              headerTintColor: '#c2f2e1',
+            }}>
+             <HomeStack.Screen name="Home" component={HomeTabScreen} options={{headerShown: false}}  />
+             <HomeStack.Screen name="Deck" component={Deck} options={({ route }) => ({ title: route.params.name })}
+  />
+             <HomeStack.Screen name="Quiz" component={Quiz} />
+             <HomeStack.Screen name="AddCard" component={AddCard} />
+             <HomeStack.Screen name="Stats" component={Stats} />
+            </HomeStack.Navigator>
 
 
-        </NavigationContainer>
+          </NavigationContainer>
 
-      </View>
+        </View>
 
-    </Provider>
-  )
+      </Provider>
+    )
+  }
 }

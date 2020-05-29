@@ -5,6 +5,7 @@ import ProgressCircle from 'react-native-progress-circle'
 import styles from './styles'
 import { connect } from 'react-redux'
 import { saveStats } from '../actions'
+import { clearLocalNotification, setLocalNotification } from '../util'
 
 // FlipCard added instructions: https://openbase.io/js/react-native-flip-card
 // installed react-native-progress-circle site: https://www.npmjs.com/package/react-native-progress-circle
@@ -34,6 +35,9 @@ class Quiz extends Component {
     const { dispatch } = this.props
     dispatch(saveStats(correct, incorrect, id))
 
+    clearLocalNotification()
+    .then(setLocalNotification)
+
     this.setState({
       card: 0,
       correct: 0,
@@ -44,6 +48,9 @@ class Quiz extends Component {
   goBack (correct, incorrect, id) {
     const { navigation, dispatch } = this.props
     dispatch(saveStats(correct, incorrect, id))
+
+    clearLocalNotification()
+    .then(setLocalNotification)
 
     navigation.navigate('Deck')
   }
