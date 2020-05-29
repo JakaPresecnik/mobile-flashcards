@@ -13,10 +13,12 @@ class AddDeck extends Component {
 
   onSubmit(inputText) {
     const { navigation, dispatch } = this.props
+    const id = generateID()
 
-    dispatch(addDeck(inputText))
+    dispatch(addDeck(inputText, id))
     this.setState({inputText: ''})
-    navigation.navigate('Deck')
+    navigation.navigate('Deck', {key: this.props.route.key, id: id})
+
   }
 
   render() {

@@ -4,10 +4,10 @@ export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
 export const SAVE_STATS = 'SAVE_STATS'
 
-export const addDeck = (deckName) => {
+export const addDeck = (deckName,id) => {
   return {
     type: ADD_DECK,
-    key: generateID(),
+    key: id,
     deckName,
   }
 }
