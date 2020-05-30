@@ -11,6 +11,8 @@ module.exports = StyleSheet.create({
   },
   box: {
     flex: 1,
+    minHeight: 200,
+    padding: 5,
     marginTop: 25,
     marginBottom: 25,
     alignSelf: 'stretch',
@@ -70,4 +72,9 @@ module.exports = StyleSheet.create({
   textBox: {
     marginTop: 35,
   },
+  cardCount: {
+    alignSelf: 'flex-end',
+    marginBottom: 40,
+    marginRight: 20,
+  }
 })

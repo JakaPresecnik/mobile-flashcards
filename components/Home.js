@@ -1,22 +1,49 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity} from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+
+import { connect } from 'react-redux'
 
 import styles from './styles'
 
 class Home extends Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, decks, deckIds } = this.props
 
+    if (decks === null) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.headerText}>You have no decks in your collection.</Text>
+        </View>
+      )
+    }
     return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Deck')}>
-          <Text style={styles.deckName}>Deck Name</Text>
-          <Text style={styles.numCards}>20 cards</Text>
-        </TouchableOpacity>
-      </View>
+      <ScrollView >
+
+        {deckIds.map((id) => (
+          <TouchableOpacity style={styles.box} key={id} onPress={ () => navigation.navigate('Deck', {id: id, name: decks[id].name}) }>
+            <Text style={styles.deckName}>{decks[id].name}</Text>
+            <Text style={styles.numCards}>{decks[id].collection.length} card{decks[id].collection.length === 1 ? ('') : ('s')}</Text>
+          </TouchableOpacity>
+        ))}
+
+      </ScrollView>
 
     )
   }
 }
 
-export default Home
+const mapStateToProps = (state) => {
+  if (state === undefined) {
+    return {
+      decks: null,
+      deckIds: null,
+    }
+  }else {
+    return {
+      deckIds: Object.keys(state),
+      decks: state,
+    }
+  }
+}
+
+export default connect(mapStateToProps)(Home)
