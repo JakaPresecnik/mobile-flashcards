@@ -8,8 +8,8 @@ import styles from './styles'
 class Home extends Component {
   render() {
     const { navigation, decks, deckIds } = this.props
-
-    if (decks === null) {
+    console.log(decks)
+    if (decks === null || Object.entries(decks).length === 0) {
       return (
         <View style={styles.container}>
           <Text style={styles.headerText}>You have no decks in your collection.</Text>

@@ -40,8 +40,12 @@ class AddCard extends Component {
         <KeyboardAvoidingView style={[styles.container]}>
           <TextInput onChangeText={text => this.setState({question: text})} value={question} style={styles.inputText} placeholder = "Question" ></TextInput>
           <TextInput onChangeText={text => this.setState({answer: text})} value={answer} style={styles.inputText} placeholder = "Answer" ></TextInput>
-            <TouchableOpacity style={[styles.btn, {backgroundColor: '#c2f2e1', marginTop: 35}]}>
-              <Text onPress={e => { this.onSubmit(question, answer, id) }} style={styles.btnText}>SUBMIT</Text>
+            <TouchableOpacity
+              disabled={question === '' || answer === ''}
+              style={[styles.btn, {backgroundColor: '#c2f2e1', marginTop: 35}]}
+              onPress={e => { this.onSubmit(question, answer, id) }}
+            >
+              <Text style={styles.btnText}>SUBMIT</Text>
             </TouchableOpacity>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
