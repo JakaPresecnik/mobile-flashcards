@@ -9,7 +9,6 @@ class Deck extends Component {
     const { navigation, route, decks } = this.props
     const { id } = route.params
 
-    console.log(this.props)
     return(
       <View style={styles.container}>
 

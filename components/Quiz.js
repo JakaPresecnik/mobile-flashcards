@@ -98,8 +98,9 @@ class Quiz extends Component {
     } else {
       return (
         <View style={[styles.container, {marginTop: 10}]}>
-        <Text style={[styles.cardText, styles.cardCount]}>{card + 1}/{collection.length}</Text>
+          <Text style={[styles.cardText, styles.cardCount]}>{card + 1}/{collection.length}</Text>
           <View>
+
             <FlipCard flipHorizontal={true} flipVertical={false}>
               <View style={styles.face}>
                 <Text style={styles.headerText}>{collection[card].question}</Text>
@@ -121,7 +122,7 @@ class Quiz extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          </View>
+        </View>
       )
     }
   }

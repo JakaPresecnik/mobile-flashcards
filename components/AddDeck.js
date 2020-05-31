@@ -36,6 +36,7 @@ class AddDeck extends Component {
 
 
           <TouchableOpacity
+            disabled={inputText === ''}
             style={[styles.btn, {backgroundColor: '#c2f2e1'}]}
             onPress={e => { this.onSubmit(inputText) } }>
             <Text style={styles.btnText}>SUBMIT</Text>
