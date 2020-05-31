@@ -15,19 +15,22 @@ class Quiz extends Component {
     card: 0,
     correct: 0,
     incorrect: 0,
+    front: true,
   }
 
   answerCorr () {
     this.setState((prevState) => ({
       card: prevState.card + 1,
-      correct: prevState.correct + 1
+      correct: prevState.correct + 1,
+      front: !prevState.front
     }))
   }
 
   answerIncorr () {
     this.setState((prevState) => ({
       card: prevState.card + 1,
-      incorrect: prevState.incorrect + 1
+      incorrect: prevState.incorrect + 1,
+      front: !prevState.front,
     }))
   }
 
@@ -42,13 +45,15 @@ class Quiz extends Component {
       card: 0,
       correct: 0,
       incorrect: 0,
+      front: true,
     })
   }
 
   goBack (correct, incorrect, id) {
     const { navigation, dispatch } = this.props
     dispatch(saveStats(correct, incorrect, id))
-
+    this.setState({front: true})
+    
     clearLocalNotification()
     .then(setLocalNotification)
 
@@ -101,7 +106,7 @@ class Quiz extends Component {
           <Text style={[styles.cardText, styles.cardCount]}>{card + 1}/{collection.length}</Text>
           <View>
 
-            <FlipCard flipHorizontal={true} flipVertical={false}>
+            <FlipCard flipHorizontal={true} flipVertical={false} flip={this.state.front}>
               <View style={styles.face}>
                 <Text style={styles.headerText}>{collection[card].question}</Text>
                 <Text style={styles.cardText}>Show answer</Text>
