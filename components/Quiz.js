@@ -30,7 +30,7 @@ class Quiz extends Component {
     this.setState((prevState) => ({
       card: prevState.card + 1,
       incorrect: prevState.incorrect + 1,
-      front: false,
+      front: !prevState.front,
     }))
   }
 
