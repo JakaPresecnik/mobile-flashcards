@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { connect } from 'react-redux'
 
 class Deck extends Component {
+
+
+  componentWillUnmount() {
+    AsyncStorage.setItem('@flashcards:storage', JSON.stringify(this.props.decks), (err) => {console.log('Error in Deck: ', err)})
+
+  }
+
   render() {
     const { navigation, route, decks } = this.props
     const { id } = route.params

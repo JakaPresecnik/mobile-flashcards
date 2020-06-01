@@ -5,11 +5,27 @@ import { deleteDeck } from '../actions'
 import ProgressCircle from 'react-native-progress-circle'
 
 import { connect } from 'react-redux'
+import AsyncStorage from '@react-native-community/async-storage'
 
 class Stats extends Component {
+  async removeDeck(id) {
+    console.log('removing')
+    AsyncStorage.getItem('@flashcards:storage')
+    .then(JSON.parse)
+    .then((data) => {
+      Object.keys(data).filter((deck) => {
+        return data[deck].key !== id
+      })
+    })
+    .then((data) => {
+      AsyncStorage.setItem('@flashcards:storage', JSON.stringify(this.props.decks), (err) => {console.log('Error in Deck: ', err)})
+    })
+  }
+
   deleteDeck (id) {
     this.props.navigation.navigate('Home')
     this.props.dispatch(deleteDeck(id))
+    this.removeDeck(id)
   }
 
   render() {
@@ -42,4 +58,8 @@ class Stats extends Component {
   }
 }
 
-export default connect()(Stats)
+const mapStateToProps = (decks) => {
+  return {decks}
+}
+
+export default connect(mapStateToProps)(Stats)

@@ -7,7 +7,7 @@ export default function generateID () {
 }
 
 const NOTIFICATION_KEY = 'Flashcards:notifications'
-
+const STORAGE_KEY = 'STORAGE_KEY'
 
 export function clearLocalNotification () {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)

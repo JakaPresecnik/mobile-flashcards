@@ -1,4 +1,4 @@
-import { ADD_DECK, ADD_CARD, SAVE_STATS, DELETE_DECK } from '../actions'
+import { ADD_DECK, ADD_CARD, SAVE_STATS, DELETE_DECK, GET_DATA } from '../actions'
 
 export default function reducer (state = {}, action) {
   switch(action.type) {
@@ -38,6 +38,12 @@ export default function reducer (state = {}, action) {
       const { [action.id]:_, ...rest } = state
       return {
         ...rest,
+      }
+
+    case GET_DATA:
+      return {
+        ...state,
+        ...action.data,
       }
   }
 }

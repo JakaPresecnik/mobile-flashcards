@@ -8,7 +8,7 @@ import styles from './styles'
 class Home extends Component {
   render() {
     const { navigation, decks, deckIds } = this.props
-    console.log(decks)
+
     if (decks === null || Object.entries(decks).length === 0) {
       return (
         <View style={styles.container}>

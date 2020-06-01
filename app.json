@@ -1,5 +1,6 @@
 {
   "expo": {
+    "sdkVersion": "37.0.0",
     "name": "mobile-flashcards",
     "slug": "mobile-flashcards",
     "platforms": [
@@ -23,6 +24,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+     "package": "org.jakaflashcards.exp",
     }
   }
 }

@@ -15,7 +15,7 @@ class Quiz extends Component {
     card: 0,
     correct: 0,
     incorrect: 0,
-    front: true,
+    front: false,
   }
 
   answerCorr () {
@@ -30,7 +30,7 @@ class Quiz extends Component {
     this.setState((prevState) => ({
       card: prevState.card + 1,
       incorrect: prevState.incorrect + 1,
-      front: !prevState.front,
+      front: false,
     }))
   }
 
@@ -45,15 +45,15 @@ class Quiz extends Component {
       card: 0,
       correct: 0,
       incorrect: 0,
-      front: true,
+      front: false,
     })
   }
 
   goBack (correct, incorrect, id) {
     const { navigation, dispatch } = this.props
     dispatch(saveStats(correct, incorrect, id))
-    this.setState({front: true})
-    
+    this.setState({front: false})
+
     clearLocalNotification()
     .then(setLocalNotification)
 
@@ -62,7 +62,7 @@ class Quiz extends Component {
 
   render() {
     const { collection, id } = this.props.route.params
-    const { card, correct, incorrect } = this.state
+    const { card, correct, incorrect, front } = this.state
     const totalAnswers = correct + incorrect
     const percentage = correct / totalAnswers * 100
 
@@ -106,26 +106,30 @@ class Quiz extends Component {
           <Text style={[styles.cardText, styles.cardCount]}>{card + 1}/{collection.length}</Text>
           <View>
 
-            <FlipCard flipHorizontal={true} flipVertical={false} flip={this.state.front}>
+            <FlipCard flipHorizontal={true} flipVertical={false} flip={front}>
+
               <View style={styles.face}>
                 <Text style={styles.headerText}>{collection[card].question}</Text>
                 <Text style={styles.cardText}>Show answer</Text>
               </View>
+
               <View style={styles.back}>
                 <Text style={styles.headerText}>{collection[card].answer}</Text>
                 <Text style={styles.cardText}>Show question</Text>
+                <View style={{alignSelf: 'center'}}>
+
+                  <TouchableOpacity onPress={e => this.answerCorr()} style={[styles.btn, {backgroundColor: 'green'}]}>
+                    <Text style={[styles.btnText, {color: '#003f00'}]}>CORRECT</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={e => this.answerIncorr()} style={[styles.btn, {backgroundColor: 'red'}]}>
+                    <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
+                  </TouchableOpacity>
+
+                </View>
               </View>
             </FlipCard>
 
-            <View style={{alignSelf: 'center'}}>
 
-              <TouchableOpacity onPress={e => this.answerCorr()} style={[styles.btn, {backgroundColor: 'green'}]}>
-                <Text style={[styles.btnText, {color: '#003f00'}]}>CORRECT</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={e => this.answerIncorr()} style={[styles.btn, {backgroundColor: 'red'}]}>
-                <Text style={[styles.btnText, {color: '#3f0000'}]}>INCORRECT</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
       )
